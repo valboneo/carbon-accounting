@@ -1,0 +1,111 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-blue-100 mb-4">
+      <svg class="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      </svg>
+    </div>
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">Carbon Tracker</h1>
+    <p class="text-lg text-gray-600"><%= t('infrastructures.index.main_subtitle') %></p>
+  </div>
+
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900"><%= t('infrastructures.index.title') %></h1>
+      <p class="mt-1 text-sm text-gray-500"><%= t('infrastructures.index.subtitle') %></p>
+    </div>
+    <div class="flex space-x-4">
+      <%= link_to export_csv_infrastructures_path(format: :csv), class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center" do %>
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+        </svg>
+        <%= t('infrastructures.index.export_csv') %>
+      <% end %>
+      <%= link_to new_infrastructure_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center" do %>
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <%= t('infrastructures.index.new_infrastructure') %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+              <%= sortable "name", t('infrastructures.index.name') %>
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+              <%= sortable "infrastructure_type", t('infrastructures.index.type') %>
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+              <%= sortable "energy_consumption", t('infrastructures.index.consumption') %>
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+              <%= sortable "carbon_footprint", t('infrastructures.index.carbon_footprint') %>
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+              <%= sortable "location", t('infrastructures.index.location') %>
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+              <%= sortable "status", t('infrastructures.index.status') %>
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+              <%= t('infrastructures.index.actions') %>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @infrastructures.each do |infrastructure| %>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <%= infrastructure.name %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= infrastructure.infrastructure_type %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= "#{infrastructure.energy_consumption} kWh" %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= "#{infrastructure.carbon_footprint} kg CO2e" %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <%= infrastructure.location %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= infrastructure.status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                  <%= infrastructure.status %>
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <%= link_to t('infrastructures.index.show'), infrastructure_path(infrastructure), class: "text-blue-600 hover:text-blue-900 mr-3" %>
+                <%= link_to t('infrastructures.index.edit'), edit_infrastructure_path(infrastructure), class: "text-indigo-600 hover:text-indigo-900 mr-3" %>
+                <%= link_to t('infrastructures.index.delete'), 
+                    infrastructure_path(infrastructure), 
+                    data: { turbo_method: :delete, turbo_confirm: t('infrastructures.index.delete_confirm') },
+                    class: "text-red-600 hover:text-red-900" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="mt-6 bg-gray-50 p-4 rounded-lg">
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <h3 class="text-sm font-medium text-gray-500"><%= t('infrastructures.index.total_energy') %></h3>
+        <p class="mt-1 text-lg font-semibold text-gray-900"><%= number_with_precision(@total_energy, precision: 2) %> kWh</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-medium text-gray-500"><%= t('infrastructures.index.total_carbon') %></h3>
+        <p class="mt-1 text-lg font-semibold text-gray-900"><%= number_with_precision(@total_carbon, precision: 2) %> kg CO2e</p>
+      </div>
+    </div>
+  </div>
+</div>

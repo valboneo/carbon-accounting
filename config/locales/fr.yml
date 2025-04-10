@@ -1,0 +1,43 @@
+fr:
+  infrastructures:
+    index:
+      title: "Liste des Infrastructures"
+      subtitle: "Suivi des émissions de carbone des infrastructures numériques"
+      main_subtitle: "Suivi des émissions de carbone des infrastructures numériques"
+      new_infrastructure: "Nouvelle Infrastructure"
+      export_csv: "Exporter CSV"
+      name: "Nom"
+      type: "Type"
+      consumption: "Consommation"
+      carbon_footprint: "Empreinte CO2"
+      location: "Localisation"
+      status: "Statut"
+      actions: "Actions"
+      total_energy: "Consommation totale"
+      total_carbon: "Empreinte carbone totale"
+      show: "Voir"
+      edit: "Modifier"
+      delete: "Supprimer"
+      delete_confirm: "Êtes-vous sûr ?"
+    show:
+      title: "Détails de l'Infrastructure"
+      back: "Retour"
+    new:
+      title: "Nouvelle Infrastructure"
+      create: "Créer"
+    edit:
+      title: "Modifier l'Infrastructure"
+      update: "Mettre à jour"
+    form:
+      name: "Nom"
+      type: "Type"
+      consumption: "Consommation (kWh)"
+      carbon_footprint: "Empreinte CO2 (kg CO2e)"
+      location: "Localisation"
+      status: "Statut"
+      active: "Active"
+      inactive: "Inactive"
+    notices:
+      created: "Votre Infrastructure a été créée"
+      updated: "Votre Infrastructure a été mise à jour"
+      deleted: "Infrastructure supprimée avec succès" 

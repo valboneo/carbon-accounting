@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .sortable {
+    @apply text-gray-500 hover:text-gray-700 flex items-center;
+  }
+  
+  .sortable.current {
+    @apply text-blue-600 font-bold;
+  }
+  
+  .sortable .arrow {
+    @apply ml-1 text-sm;
+  }
+} 

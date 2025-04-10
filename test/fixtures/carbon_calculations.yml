@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  infrastructure: one
+  calculation_date: 2025-04-10 11:50:28
+  total_carbon: 9.99
+  factors_used: 
+  notes: MyText
+
+two:
+  infrastructure: two
+  calculation_date: 2025-04-10 11:50:28
+  total_carbon: 9.99
+  factors_used: 
+  notes: MyText
