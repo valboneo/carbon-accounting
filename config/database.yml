@@ -18,6 +18,7 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV.fetch("DATABASE_URL") { "postgres://postgres:password@localhost:5432/carbon_accounting_development" } %>
 
 
 development:
@@ -80,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: carbon_accounting_production
+  url: <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: carbon_accounting
   password: <%= ENV["CARBON_ACCOUNTING_DATABASE_PASSWORD"] %>

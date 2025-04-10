@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: carbon-accounting
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: carbon-accounting-db
+          property: connectionString
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
+
+databases:
+  - name: carbon-accounting-db
+    databaseName: carbon_accounting
+    user: carbon_accounting
+    plan: free 
